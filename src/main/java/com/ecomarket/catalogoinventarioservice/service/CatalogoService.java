@@ -13,6 +13,7 @@ import com.ecomarket.catalogoinventarioservice.repository.ProductoRepository;
 import jakarta.transaction.Transactional;
 
 @Service
+@Transactional
 public class CatalogoService {
     @Autowired
     private ProductoRepository productoRepository;
@@ -35,12 +36,10 @@ public class CatalogoService {
                 .orElseThrow(() -> new RuntimeException("Producto no encontrado: " + productoId));
     }
 
-    @Transactional
     public Producto agregarProducto(Producto nuevoProducto) {
         return productoRepository.save(nuevoProducto);
     }
 
-    @Transactional
     public Producto editarProducto(Long productoId, Producto nuevosDatos) {
         Producto existente = consultarDetalles(productoId);
         existente.setSku(nuevosDatos.getSku());
@@ -53,7 +52,6 @@ public class CatalogoService {
         return productoRepository.save(existente);
     }
 
-    @Transactional
     public boolean eliminarProducto(Long productoId) {
         if (!productoRepository.existsById(productoId)) return false;
         productoRepository.deleteById(productoId);

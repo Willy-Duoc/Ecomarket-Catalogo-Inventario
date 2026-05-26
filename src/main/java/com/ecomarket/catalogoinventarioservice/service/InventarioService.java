@@ -11,6 +11,7 @@ import com.ecomarket.catalogoinventarioservice.repository.InventarioStockReposit
 import jakarta.transaction.Transactional;
 
 @Service
+@Transactional
 public class InventarioService {
     @Autowired
     private InventarioStockRepository inventarioRepository;
@@ -28,7 +29,6 @@ public class InventarioService {
         return inventarioRepository.findBySucursalIdAndProductoId(sucursalId, productoId);
     }
 
-    @Transactional
     public boolean reservarStock(Long productoId, Integer cantidad) {
         return inventarioRepository.findByProductoId(productoId).stream()
                 .filter(s -> s.hayStock(cantidad))
@@ -41,7 +41,6 @@ public class InventarioService {
                 }).orElse(false);
     }
 
-    @Transactional
     public boolean liberarStock(Long productoId, Integer cantidad) {
         return inventarioRepository.findByProductoId(productoId).stream()
                 .filter(s -> s.getCantidadReservada() >= cantidad)
@@ -54,7 +53,6 @@ public class InventarioService {
                 }).orElse(false);
     }
 
-    @Transactional
     public InventarioStock ajustarStock(Long productoId, Long sucursalId, Integer nuevaCantidad) {
         InventarioStock stock = inventarioRepository
                 .findTopByProductoIdAndSucursalId(productoId, sucursalId)
