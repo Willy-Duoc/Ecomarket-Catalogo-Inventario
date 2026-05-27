@@ -21,6 +21,12 @@ public class InventarioController {
     @Autowired
     private InventarioService inventarioService;
 
+    // Retorna todo el inventario
+    @GetMapping
+    public ResponseEntity<List<InventarioStock>> listarInventario() {
+        return ResponseEntity.ok(inventarioService.listarTodos());
+    }
+
     // Verifica si hay stock suficiente de un producto para la cantidad solicitada
     @GetMapping("/disponibilidad/{productoId}")
     public ResponseEntity<Boolean> verificarDisponibilidad(

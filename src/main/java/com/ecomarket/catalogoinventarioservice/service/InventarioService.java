@@ -16,6 +16,10 @@ public class InventarioService {
     @Autowired
     private InventarioStockRepository inventarioRepository;
 
+    public List<InventarioStock> listarTodos() {
+        return inventarioRepository.findAll();
+    }
+
     public boolean verificarDisponibilidad(Long productoId, Integer cantidad) {
         return inventarioRepository.findByProductoId(productoId)
                 .stream().anyMatch(s -> s.hayStock(cantidad));

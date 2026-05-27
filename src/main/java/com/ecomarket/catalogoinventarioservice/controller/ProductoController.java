@@ -23,6 +23,12 @@ public class ProductoController {
     @Autowired
     private CatalogoService catalogoService;
 
+    // Retorna todos los productos
+    @GetMapping
+    public ResponseEntity<List<Producto>> listarProductos() {
+        return ResponseEntity.ok(catalogoService.listarTodos());
+    }
+
     // Retorna la lista de productos filtrados por categoría
     @GetMapping("/categoria/{categoriaId}")
     public ResponseEntity<List<Producto>> navegarCatalogo(@PathVariable Long categoriaId) {

@@ -52,6 +52,10 @@ public class CatalogoService {
         return productoRepository.save(existente);
     }
 
+    public List<Producto> listarTodos() {
+        return productoRepository.findAll();
+    }
+
     public boolean eliminarProducto(Long productoId) {
         if (!productoRepository.existsById(productoId)) return false;
         productoRepository.deleteById(productoId);

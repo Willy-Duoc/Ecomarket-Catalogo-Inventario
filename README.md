@@ -1,2 +1,2 @@
-# Microservicio de Catalogo-Inventario del software para Ecomarket
+# Microservicio de Catalogo-Inventario de software Ecomarket
 # Desarrollador: Williams Contreras
